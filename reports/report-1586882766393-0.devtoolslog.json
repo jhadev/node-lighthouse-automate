@@ -1,0 +1,724 @@
+[
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "D6CC1B047AAF1E4C7BCB2C7BB58A6031",
+      "name": "commit",
+      "timestamp": 656882.660216
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "D6CC1B047AAF1E4C7BCB2C7BB58A6031",
+      "name": "DOMContentLoaded",
+      "timestamp": 656882.660359
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "D6CC1B047AAF1E4C7BCB2C7BB58A6031",
+      "name": "load",
+      "timestamp": 656882.661054
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "D6CC1B047AAF1E4C7BCB2C7BB58A6031",
+      "name": "networkAlmostIdle",
+      "timestamp": 656882.661761
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "D6CC1B047AAF1E4C7BCB2C7BB58A6031",
+      "name": "networkIdle",
+      "timestamp": 656882.661761
+    }
+  },
+  {
+    "method": "Network.requestWillBeSent",
+    "params": {
+      "requestId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "documentURL": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+      "request": {
+        "url": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+        "method": "GET",
+        "headers": {
+          "Upgrade-Insecure-Requests": "1",
+          "User-Agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse",
+          "Sec-Fetch-Dest": "document"
+        },
+        "mixedContentType": "none",
+        "initialPriority": "VeryHigh",
+        "referrerPolicy": "no-referrer-when-downgrade"
+      },
+      "timestamp": 656882.919871,
+      "wallTime": 1586882772.539593,
+      "initiator": {
+        "type": "other"
+      },
+      "type": "Document",
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "hasUserGesture": false
+    }
+  },
+  {
+    "method": "Network.requestWillBeSentExtraInfo",
+    "params": {
+      "requestId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "blockedCookies": [],
+      "headers": {
+        ":method": "GET",
+        ":authority": "development-global-coach.demandware.net",
+        ":scheme": "https",
+        ":path": "/on/demandware.store/Sites-Coach_US-Site",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse",
+        "sec-fetch-dest": "document",
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        "sec-fetch-site": "none",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-user": "?1",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-US"
+      }
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "D6CC1B047AAF1E4C7BCB2C7BB58A6031",
+      "name": "networkAlmostIdle",
+      "timestamp": 656882.661761
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "D6CC1B047AAF1E4C7BCB2C7BB58A6031",
+      "name": "networkIdle",
+      "timestamp": 656882.661761
+    }
+  },
+  {
+    "method": "Network.responseReceivedExtraInfo",
+    "params": {
+      "requestId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "blockedCookies": [],
+      "headers": {
+        "status": "401",
+        "date": "Tue, 14 Apr 2020 16:46:17 GMT",
+        "content-type": "text/html;charset=ISO-8859-1",
+        "content-length": "422",
+        "set-cookie": "__cfduid=d03da4220d9ede007c978ee4877e3ac381586882776; expires=Thu, 14-May-20 16:46:16 GMT; path=/; domain=.demandware.net; HttpOnly; SameSite=Lax\ndwsid=MMSG_o1WgaVycL9XeByKkT8hLC2s-TYm5uRMoLxneyghdLYDpD50ShbcNamUjw9AI1yqG8Rs0Y06hTKQYbTE9A==; path=/; HttpOnly",
+        "accept-ranges": "bytes",
+        "www-authenticate": "BASIC realm=\"development-global-coach.demandware.net/on/demandware.store\"",
+        "x-error": "1",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "pragma": "no-cache",
+        "expires": "Thu, 01 Dec 1994 16:00:00 GMT",
+        "cf-cache-status": "DYNAMIC",
+        "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "server": "cloudflare",
+        "cf-ray": "583ee6ebdee1e841-EWR"
+      }
+    }
+  },
+  {
+    "method": "Network.responseReceived",
+    "params": {
+      "requestId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "timestamp": 656883.438093,
+      "type": "Document",
+      "response": {
+        "url": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+        "status": 401,
+        "statusText": "",
+        "headers": {
+          "status": "401",
+          "date": "Tue, 14 Apr 2020 16:46:17 GMT",
+          "content-type": "text/html;charset=ISO-8859-1",
+          "content-length": "422",
+          "set-cookie": "__cfduid=d03da4220d9ede007c978ee4877e3ac381586882776; expires=Thu, 14-May-20 16:46:16 GMT; path=/; domain=.demandware.net; HttpOnly; SameSite=Lax\ndwsid=MMSG_o1WgaVycL9XeByKkT8hLC2s-TYm5uRMoLxneyghdLYDpD50ShbcNamUjw9AI1yqG8Rs0Y06hTKQYbTE9A==; path=/; HttpOnly",
+          "accept-ranges": "bytes",
+          "www-authenticate": "BASIC realm=\"development-global-coach.demandware.net/on/demandware.store\"",
+          "x-error": "1",
+          "cache-control": "no-cache, no-store, must-revalidate",
+          "pragma": "no-cache",
+          "expires": "Thu, 01 Dec 1994 16:00:00 GMT",
+          "cf-cache-status": "DYNAMIC",
+          "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+          "server": "cloudflare",
+          "cf-ray": "583ee6ebdee1e841-EWR"
+        },
+        "mimeType": "text/html",
+        "requestHeaders": {
+          ":method": "GET",
+          ":authority": "development-global-coach.demandware.net",
+          ":scheme": "https",
+          ":path": "/on/demandware.store/Sites-Coach_US-Site",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse",
+          "sec-fetch-dest": "document",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+          "sec-fetch-site": "none",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-user": "?1",
+          "accept-encoding": "gzip, deflate, br",
+          "accept-language": "en-US"
+        },
+        "connectionReused": false,
+        "connectionId": 15,
+        "remoteIPAddress": "104.16.240.242",
+        "remotePort": 443,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "fromPrefetchCache": false,
+        "encodedDataLength": 967,
+        "timing": {
+          "requestTime": 656882.921522,
+          "proxyStart": 34.051,
+          "proxyEnd": 61.02,
+          "dnsStart": 61.396,
+          "dnsEnd": 108.062,
+          "connectStart": 108.062,
+          "connectEnd": 252.289,
+          "sslStart": 131.084,
+          "sslEnd": 252.224,
+          "workerStart": -1,
+          "workerReady": -1,
+          "sendStart": 253.43,
+          "sendEnd": 254.463,
+          "pushStart": 0,
+          "pushEnd": 0,
+          "receiveHeadersEnd": 510.136
+        },
+        "protocol": "h2",
+        "securityState": "secure",
+        "securityDetails": {
+          "protocol": "TLS 1.2",
+          "keyExchange": "ECDHE_RSA",
+          "keyExchangeGroup": "X25519",
+          "cipher": "AES_128_GCM",
+          "certificateId": 0,
+          "subjectName": "*.demandware.net",
+          "sanList": [
+            "*.demandware.net",
+            "demandware.net"
+          ],
+          "issuer": "DigiCert SHA2 Secure Server CA",
+          "validFrom": 1562112000,
+          "validTo": 1593777600,
+          "signedCertificateTimestampList": [],
+          "certificateTransparencyCompliance": "unknown"
+        }
+      },
+      "frameId": "23BF54B52CF760FEA4269454A61983A6"
+    }
+  },
+  {
+    "method": "Page.frameStartedLoading",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6"
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "init",
+      "timestamp": 656883.443556
+    }
+  },
+  {
+    "method": "Page.frameNavigated",
+    "params": {
+      "frame": {
+        "id": "23BF54B52CF760FEA4269454A61983A6",
+        "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+        "url": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+        "securityOrigin": "https://development-global-coach.demandware.net",
+        "mimeType": "text/html"
+      }
+    }
+  },
+  {
+    "method": "Network.dataReceived",
+    "params": {
+      "requestId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "timestamp": 656883.459183,
+      "dataLength": 422,
+      "encodedDataLength": 0
+    }
+  },
+  {
+    "method": "Network.loadingFinished",
+    "params": {
+      "requestId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "timestamp": 656883.435619,
+      "encodedDataLength": 967,
+      "shouldReportCorbBlocking": false
+    }
+  },
+  {
+    "method": "Network.requestWillBeSent",
+    "params": {
+      "requestId": "17296.2",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "documentURL": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+      "request": {
+        "url": "https://development-global-coach.demandware.net/waroot/style.css",
+        "method": "GET",
+        "headers": {
+          "Referer": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+          "User-Agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse",
+          "Sec-Fetch-Dest": "style"
+        },
+        "mixedContentType": "none",
+        "initialPriority": "VeryHigh",
+        "referrerPolicy": "no-referrer-when-downgrade"
+      },
+      "timestamp": 656883.461914,
+      "wallTime": 1586882773.081437,
+      "initiator": {
+        "type": "parser",
+        "url": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+        "lineNumber": 10
+      },
+      "type": "Stylesheet",
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "hasUserGesture": false
+    }
+  },
+  {
+    "method": "Network.requestWillBeSent",
+    "params": {
+      "requestId": "17296.3",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "documentURL": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+      "request": {
+        "url": "https://development-global-coach.demandware.net/waroot/system_arrow.gif",
+        "method": "GET",
+        "headers": {
+          "Referer": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+          "User-Agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse",
+          "Sec-Fetch-Dest": "image"
+        },
+        "mixedContentType": "none",
+        "initialPriority": "Low",
+        "referrerPolicy": "no-referrer-when-downgrade"
+      },
+      "timestamp": 656883.462783,
+      "wallTime": 1586882773.082307,
+      "initiator": {
+        "type": "parser",
+        "url": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+        "lineNumber": 14
+      },
+      "type": "Image",
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "hasUserGesture": false
+    }
+  },
+  {
+    "method": "Page.domContentEventFired",
+    "params": {
+      "timestamp": 656883.46583
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "DOMContentLoaded",
+      "timestamp": 656883.46583
+    }
+  },
+  {
+    "method": "Network.requestWillBeSentExtraInfo",
+    "params": {
+      "requestId": "17296.2",
+      "blockedCookies": [],
+      "headers": {
+        ":method": "GET",
+        ":authority": "development-global-coach.demandware.net",
+        ":scheme": "https",
+        ":path": "/waroot/style.css",
+        "user-agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse",
+        "sec-fetch-dest": "style",
+        "accept": "text/css,*/*;q=0.1",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "no-cors",
+        "referer": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-US",
+        "cookie": "__cfduid=d03da4220d9ede007c978ee4877e3ac381586882776; dwsid=MMSG_o1WgaVycL9XeByKkT8hLC2s-TYm5uRMoLxneyghdLYDpD50ShbcNamUjw9AI1yqG8Rs0Y06hTKQYbTE9A=="
+      }
+    }
+  },
+  {
+    "method": "Network.requestWillBeSentExtraInfo",
+    "params": {
+      "requestId": "17296.3",
+      "blockedCookies": [],
+      "headers": {
+        ":method": "GET",
+        ":authority": "development-global-coach.demandware.net",
+        ":scheme": "https",
+        ":path": "/waroot/system_arrow.gif",
+        "user-agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse",
+        "sec-fetch-dest": "image",
+        "accept": "image/webp,image/apng,image/*,*/*;q=0.8",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-mode": "no-cors",
+        "referer": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-US",
+        "cookie": "__cfduid=d03da4220d9ede007c978ee4877e3ac381586882776; dwsid=MMSG_o1WgaVycL9XeByKkT8hLC2s-TYm5uRMoLxneyghdLYDpD50ShbcNamUjw9AI1yqG8Rs0Y06hTKQYbTE9A=="
+      }
+    }
+  },
+  {
+    "method": "Network.responseReceivedExtraInfo",
+    "params": {
+      "requestId": "17296.2",
+      "blockedCookies": [],
+      "headers": {
+        "status": "200",
+        "date": "Tue, 14 Apr 2020 16:46:17 GMT",
+        "content-type": "application/octet-stream",
+        "content-length": "256",
+        "cf-cache-status": "HIT",
+        "age": "214",
+        "expires": "Tue, 14 Apr 2020 20:46:17 GMT",
+        "cache-control": "public, max-age=14400",
+        "accept-ranges": "bytes",
+        "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "vary": "Accept-Encoding",
+        "server": "cloudflare",
+        "cf-ray": "583ee6ed8ac3e841-EWR"
+      }
+    }
+  },
+  {
+    "method": "Network.responseReceived",
+    "params": {
+      "requestId": "17296.2",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "timestamp": 656883.513943,
+      "type": "Stylesheet",
+      "response": {
+        "url": "https://development-global-coach.demandware.net/waroot/style.css",
+        "status": 200,
+        "statusText": "",
+        "headers": {
+          "date": "Tue, 14 Apr 2020 16:46:17 GMT",
+          "cf-cache-status": "HIT",
+          "server": "cloudflare",
+          "age": "214",
+          "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+          "vary": "Accept-Encoding",
+          "content-type": "application/octet-stream",
+          "status": "200",
+          "cache-control": "public, max-age=14400",
+          "accept-ranges": "bytes",
+          "cf-ray": "583ee6ed8ac3e841-EWR",
+          "content-length": "256",
+          "expires": "Tue, 14 Apr 2020 20:46:17 GMT"
+        },
+        "mimeType": "application/octet-stream",
+        "connectionReused": true,
+        "connectionId": 15,
+        "remoteIPAddress": "104.16.240.242",
+        "remotePort": 443,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "fromPrefetchCache": false,
+        "encodedDataLength": 394,
+        "timing": {
+          "requestTime": 656883.462712,
+          "proxyStart": 2.851,
+          "proxyEnd": 5.23,
+          "dnsStart": -1,
+          "dnsEnd": -1,
+          "connectStart": -1,
+          "connectEnd": -1,
+          "sslStart": -1,
+          "sslEnd": -1,
+          "workerStart": -1,
+          "workerReady": -1,
+          "sendStart": 5.4,
+          "sendEnd": 5.911,
+          "pushStart": 0,
+          "pushEnd": 0,
+          "receiveHeadersEnd": 48.837
+        },
+        "protocol": "h2",
+        "securityState": "secure",
+        "securityDetails": {
+          "protocol": "TLS 1.2",
+          "keyExchange": "ECDHE_RSA",
+          "keyExchangeGroup": "X25519",
+          "cipher": "AES_128_GCM",
+          "certificateId": 0,
+          "subjectName": "*.demandware.net",
+          "sanList": [
+            "*.demandware.net",
+            "demandware.net"
+          ],
+          "issuer": "DigiCert SHA2 Secure Server CA",
+          "validFrom": 1562112000,
+          "validTo": 1593777600,
+          "signedCertificateTimestampList": [],
+          "certificateTransparencyCompliance": "unknown"
+        }
+      },
+      "frameId": "23BF54B52CF760FEA4269454A61983A6"
+    }
+  },
+  {
+    "method": "Network.dataReceived",
+    "params": {
+      "requestId": "17296.2",
+      "timestamp": 656883.514565,
+      "dataLength": 256,
+      "encodedDataLength": 0
+    }
+  },
+  {
+    "method": "Network.loadingFinished",
+    "params": {
+      "requestId": "17296.2",
+      "timestamp": 656883.513588,
+      "encodedDataLength": 394,
+      "shouldReportCorbBlocking": false
+    }
+  },
+  {
+    "method": "Network.responseReceivedExtraInfo",
+    "params": {
+      "requestId": "17296.3",
+      "blockedCookies": [],
+      "headers": {
+        "status": "200",
+        "date": "Tue, 14 Apr 2020 16:46:17 GMT",
+        "content-type": "image/gif",
+        "content-length": "1087",
+        "cf-bgj": "imgq:100",
+        "cf-polished": "status=not_needed",
+        "cf-cache-status": "HIT",
+        "age": "214",
+        "expires": "Tue, 14 Apr 2020 20:46:17 GMT",
+        "cache-control": "public, max-age=14400",
+        "accept-ranges": "bytes",
+        "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "vary": "Accept-Encoding",
+        "server": "cloudflare",
+        "cf-ray": "583ee6ed8ad7e841-EWR"
+      }
+    }
+  },
+  {
+    "method": "Network.resourceChangedPriority",
+    "params": {
+      "requestId": "17296.3",
+      "newPriority": "High",
+      "timestamp": 656883.588478
+    }
+  },
+  {
+    "method": "Network.responseReceived",
+    "params": {
+      "requestId": "17296.3",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "timestamp": 656883.590932,
+      "type": "Image",
+      "response": {
+        "url": "https://development-global-coach.demandware.net/waroot/system_arrow.gif",
+        "status": 200,
+        "statusText": "",
+        "headers": {
+          "date": "Tue, 14 Apr 2020 16:46:17 GMT",
+          "cf-cache-status": "HIT",
+          "cf-bgj": "imgq:100",
+          "server": "cloudflare",
+          "age": "214",
+          "cf-polished": "status=not_needed",
+          "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+          "vary": "Accept-Encoding",
+          "content-type": "image/gif",
+          "status": "200",
+          "cache-control": "public, max-age=14400",
+          "accept-ranges": "bytes",
+          "cf-ray": "583ee6ed8ad7e841-EWR",
+          "content-length": "1087",
+          "expires": "Tue, 14 Apr 2020 20:46:17 GMT"
+        },
+        "mimeType": "image/gif",
+        "connectionReused": true,
+        "connectionId": 15,
+        "remoteIPAddress": "104.16.240.242",
+        "remotePort": 443,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "fromPrefetchCache": false,
+        "encodedDataLength": 1193,
+        "timing": {
+          "requestTime": 656883.463464,
+          "proxyStart": 3.043,
+          "proxyEnd": 6.125,
+          "dnsStart": -1,
+          "dnsEnd": -1,
+          "connectStart": -1,
+          "connectEnd": -1,
+          "sslStart": -1,
+          "sslEnd": -1,
+          "workerStart": -1,
+          "workerReady": -1,
+          "sendStart": 6.283,
+          "sendEnd": 6.822,
+          "pushStart": 0,
+          "pushEnd": 0,
+          "receiveHeadersEnd": 56.205
+        },
+        "protocol": "h2",
+        "securityState": "secure",
+        "securityDetails": {
+          "protocol": "TLS 1.2",
+          "keyExchange": "ECDHE_RSA",
+          "keyExchangeGroup": "X25519",
+          "cipher": "AES_128_GCM",
+          "certificateId": 0,
+          "subjectName": "*.demandware.net",
+          "sanList": [
+            "*.demandware.net",
+            "demandware.net"
+          ],
+          "issuer": "DigiCert SHA2 Secure Server CA",
+          "validFrom": 1562112000,
+          "validTo": 1593777600,
+          "signedCertificateTimestampList": [],
+          "certificateTransparencyCompliance": "unknown"
+        }
+      },
+      "frameId": "23BF54B52CF760FEA4269454A61983A6"
+    }
+  },
+  {
+    "method": "Network.dataReceived",
+    "params": {
+      "requestId": "17296.3",
+      "timestamp": 656883.591466,
+      "dataLength": 1087,
+      "encodedDataLength": 0
+    }
+  },
+  {
+    "method": "Network.loadingFinished",
+    "params": {
+      "requestId": "17296.3",
+      "timestamp": 656883.521716,
+      "encodedDataLength": 1193,
+      "shouldReportCorbBlocking": false
+    }
+  },
+  {
+    "method": "Page.loadEventFired",
+    "params": {
+      "timestamp": 656883.594841
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "load",
+      "timestamp": 656883.594841
+    }
+  },
+  {
+    "method": "Page.frameStoppedLoading",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6"
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "firstPaint",
+      "timestamp": 656883.623187
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "firstContentfulPaint",
+      "timestamp": 656883.623187
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "firstMeaningfulPaintCandidate",
+      "timestamp": 656883.623187
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "firstImagePaint",
+      "timestamp": 656883.63411
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "networkAlmostIdle",
+      "timestamp": 656883.465847
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "firstMeaningfulPaint",
+      "timestamp": 656883.623187
+    }
+  },
+  {
+    "method": "Page.lifecycleEvent",
+    "params": {
+      "frameId": "23BF54B52CF760FEA4269454A61983A6",
+      "loaderId": "90A3BC6F146C1443D1AD6A6B0290510A",
+      "name": "networkIdle",
+      "timestamp": 656883.592814
+    }
+  }
+]
