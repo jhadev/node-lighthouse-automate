@@ -26,7 +26,7 @@ const saveToMongo = async () => {
   let data = await read(path, 'utf8');
   data = [JSON.parse(data)];
 
-  await write('./reports/currentReport.json', JSON.stringify(data));
+  await write('./reports/lastSavedReport.json', JSON.stringify(data));
   sh.exec(importIntoMongo, (code, output) => {
     console.log(output);
   });
