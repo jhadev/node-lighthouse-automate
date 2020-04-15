@@ -1,6 +1,5 @@
 const fs = require('fs');
 const { promisify } = require('util');
-const { spawn, exec } = require('child_process');
 const sh = require('shelljs');
 require('dotenv').config();
 
