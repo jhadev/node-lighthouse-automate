@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const read = promisify(fs.readFile);
 const write = promisify(fs.writeFile);
+let count = 0;
 
 let now = Date.now();
 
@@ -23,6 +24,7 @@ const runLighthouse = () => {
 };
 
 const saveToMongo = async () => {
+  count += 1;
   await runLighthouse();
   const path = `./reports/report-${now}.json`;
   let data = await read(path, 'utf8');
@@ -30,8 +32,13 @@ const saveToMongo = async () => {
 
   await write('./reports/lastSavedReport.json', JSON.stringify(data));
   sh.exec(importIntoMongo, (code, output) => {
+    if (count === 2) {
+      console.log('done', count);
+      return clearInterval(interval);
+    }
     console.log(output);
   });
 };
 
+const interval = setInterval(saveToMongo, 1200000);
 saveToMongo();
