@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { promisify } = require('util');
+const { spawn, exec } = require('child_process');
 const sh = require('shelljs');
 require('dotenv').config();
 
@@ -8,7 +9,7 @@ const write = promisify(fs.writeFile);
 
 let now = Date.now();
 
-const command = `lighthouse ${process.env.URL} --output json --output-path ./reports/report-${now}.json --chrome-flags="--headless" --save-assets`;
+const command = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output-path ./reports/report-${now}.json --chrome-flags="--headless" --save-assets`;
 
 const importIntoMongo = `mongoimport --jsonArray -d lighthouse-automation -c data --file .//reports/lastSavedReport.json`;
 
