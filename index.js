@@ -9,7 +9,7 @@ let count = 0;
 
 let now = Date.now();
 
-const command = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output-path ./reports/report-${now}.json --chrome-flags="--headless" --save-assets`;
+const command = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output csv --output-path=./reports/report-${now}.json --chrome-flags="--headless" --save-assets`;
 
 const importIntoMongo = `mongoimport --jsonArray -d lighthouse-automation -c data --file .//reports/lastSavedReport.json`;
 
@@ -25,7 +25,7 @@ const runLighthouse = () => {
 const saveToMongo = async () => {
   count += 1;
   await runLighthouse();
-  const path = `./reports/report-${now}.json`;
+  const path = `./reports/report-${now}.report.json`;
   let data = await read(path, 'utf8');
   data = [JSON.parse(data)];
 
@@ -40,4 +40,5 @@ const saveToMongo = async () => {
 };
 
 const interval = setInterval(saveToMongo, 1200000);
+
 saveToMongo();
