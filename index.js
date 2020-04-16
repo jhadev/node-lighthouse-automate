@@ -1,19 +1,22 @@
 const fs = require('fs');
+// turn callbacks into promises
 const { promisify } = require('util');
+// execute shell commands
 const sh = require('shelljs');
 require('dotenv').config();
 
 const read = promisify(fs.readFile);
 const write = promisify(fs.writeFile);
-let count = 0;
 
+// TODO: fix file name structure
 let now = Date.now();
 
-const command = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output csv --output-path=./reports/report-${now}.json --chrome-flags="--headless" --save-assets`;
+const lighthouseCommand = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output csv --output-path=./reports/report-${now}.json --chrome-flags="--headless" --save-assets`;
 
-const importIntoMongo = `mongoimport --jsonArray -d lighthouse-automation -c data --file .//reports/lastSavedReport.json`;
+const importToDb = `mongoimport --jsonArray -d lighthouse-automation -c data --file .//reports/lastSavedReport.json`;
 
-const runLighthouse = () => {
+// make sure lighthouse finishes before moving on to next task
+const runLighthouse = (command) => {
   return new Promise((resolve, reject) => {
     sh.exec(command, (code, output) => {
       console.log(output);
@@ -22,23 +25,21 @@ const runLighthouse = () => {
   });
 };
 
-const saveToMongo = async () => {
-  count += 1;
-  await runLighthouse();
+const saveToDb = async () => {
+  // wait for lighthouse to finish
+  await runLighthouse(lighthouseCommand);
+  // file path for lighthouse output
   const path = `./reports/report-${now}.report.json`;
+  // read json
   let data = await read(path, 'utf8');
+  // put json data into an array
   data = [JSON.parse(data)];
-
+  // overwrite json file with array
   await write('./reports/lastSavedReport.json', JSON.stringify(data));
-  sh.exec(importIntoMongo, (code, output) => {
-    if (count === 2) {
-      console.log('done', count);
-      return clearInterval(interval);
-    }
+  // import into mongo
+  sh.exec(importToDb, (code, output) => {
     console.log(output);
   });
 };
 
-const interval = setInterval(saveToMongo, 1200000);
-
-saveToMongo();
+saveToDb();
