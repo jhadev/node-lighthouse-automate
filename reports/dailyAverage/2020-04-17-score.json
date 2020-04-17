@@ -1,25 +1,25 @@
 {
   "date": "2020-04-17",
   "url": "https://development-global-coach.demandware.net/on/demandware.store/Sites-Coach_US-Site",
-  "score": 0.10333333333333335,
+  "score": 0.09785714285714288,
   "firstMeaningfulPaint": {
-    "score": 0.24916666666666668,
-    "numericValue": 5340.983416666667
+    "score": 0.23214285714285715,
+    "numericValue": 5483.066142857143
   },
   "firstContentfulPaint": {
-    "score": 0.43250000000000005,
-    "numericValue": 4306.42625
+    "score": 0.4057142857142858,
+    "numericValue": 4446.7714642857145
   },
   "speedIndex": {
-    "score": 0.0008333333333333334,
-    "numericValue": 19818.29805809769
+    "score": 0.0007142857142857143,
+    "numericValue": 20323.70246019483
   },
   "interactive": {
-    "score": 0.0025,
-    "numericValue": 28666.56433333333
+    "score": 0.002142857142857143,
+    "numericValue": 29905.752928571426
   },
   "firstCPUIdle": {
-    "score": 0.008333333333333333,
-    "numericValue": 19802.947666666663
+    "score": 0.007142857142857143,
+    "numericValue": 21090.165857142852
   }
 }
