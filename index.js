@@ -40,7 +40,7 @@ const saveToDb = async () => {
   // put json data into an array
   data = [JSON.parse(data)];
   // overwrite json file with array
-  await write('./reports/lastSavedReport.json', JSON.stringify(data));
+  await write('./reports/lastSavedReport.json', JSON.stringify(data, null, 2));
   // import into mongo
   sh.exec(importToDb, (code, output) => {
     console.log(output);
@@ -62,10 +62,8 @@ const isFileFromToday = fileName => {
 const getFilesForToday = async () => {
   const fileNames = await readDir('./reports/')
   
-  console.log(fileNames)
   const onlyToday = fileNames.filter(isFileFromToday)
 
-  console.log(onlyToday)
   return Promise.all(onlyToday.map(async file => {
     return await read(`./reports/${file}`, 'utf8')
   }))
@@ -84,17 +82,20 @@ const getKeyMetrics = async () => {
       firstContentfulPaint: file.audits['first-contentful-paint'],
       speedIndex: file.audits['speed-index'],
       interactive: file.audits['interactive'],
-      firstCPUIdle: file.audits['first-cpu-idle']
+      firstCPUIdle: file.audits['first-cpu-idle'],
+      score: file.categories.performance.score
     }
   })
 
   console.log(onlyKeyMetrics)
   const totalItems = onlyKeyMetrics.length
+  // TODO: refactor
   const sums = onlyKeyMetrics.reduce((total, next) => {
     
     return {
       date: today,
       url: next.url,
+      score: total.score + next.score,
       firstMeaningfulPaint: {
         score: (total.firstMeaningfulPaint.score + next.firstMeaningfulPaint.score),
         numericValue: (total.firstMeaningfulPaint.numericValue + next.firstMeaningfulPaint.numericValue)
@@ -119,6 +120,7 @@ const getKeyMetrics = async () => {
   }, {
     date: today,
     url: '',
+    score: 0,
     firstContentfulPaint: {score: 0, numericValue: 0},
     firstMeaningfulPaint: {score: 0, numericValue: 0},
     speedIndex: {score: 0, numericValue: 0},
@@ -126,18 +128,9 @@ const getKeyMetrics = async () => {
     firstCPUIdle: {score: 0, numericValue: 0}
   })
 
-  console.log(sums)
-
-  // const averages = Object.entries(sums).map(([key, value]) => {
-  //   if (typeof value === 'number') {
-  //     key = key / totalItems
-  //   }
-
-  //   return [key]: value
-  // })
-
   const averages = {
     ...sums,
+    score: sums.score / totalItems,
     firstMeaningfulPaint: {
         score: sums.firstMeaningfulPaint.score / totalItems,
         numericValue: sums.firstMeaningfulPaint.numericValue / totalItems
@@ -160,8 +153,14 @@ const getKeyMetrics = async () => {
       }
   }
 
-  console.log(averages)
-  
+  return averages
 }
 
-saveToDb().then(() => getKeyMetrics());
+const writeAvgs = async () => {
+  const averages = await getKeyMetrics()
+
+  return await write(`./reports/dailyAverage/${today}-score.json`, JSON.stringify(averages, null, 2))
+}
+
+
+saveToDb().then(() => writeAvgs());
