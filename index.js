@@ -95,21 +95,38 @@ const getKeyMetrics = async () => {
     return {
       date: today,
       url: next.url,
-      firstMeaningfulPaint: (total.firstMeaningfulPaint + next.firstMeaningfulPaint.score),
-      firstContentfulPaint: (total.firstContentfulPaint + next.firstContentfulPaint.score),
-      speedIndex: (total.speedIndex + next.speedIndex.score),
-      interactive: (total.interactive + next.interactive.score),
-      firstCPUIdle: (total.firstCPUIdle + next.firstCPUIdle.score)
+      firstMeaningfulPaint: {
+        score: (total.firstMeaningfulPaint.score + next.firstMeaningfulPaint.score),
+        numericValue: (total.firstMeaningfulPaint.numericValue + next.firstMeaningfulPaint.numericValue)
+      },
+      firstContentfulPaint: {
+        score: (total.firstContentfulPaint.score + next.firstContentfulPaint.score),
+        numericValue: (total.firstContentfulPaint.numericValue + next.firstContentfulPaint.numericValue)
+      },
+      speedIndex: {
+        score: (total.speedIndex.score + next.speedIndex.score),
+        numericValue: (total.speedIndex.numericValue + next.speedIndex.numericValue)
+      },
+      interactive: {
+        score: (total.interactive.score + next.interactive.score),
+        numericValue: (total.interactive.numericValue + next.interactive.numericValue)
+      },
+      firstCPUIdle: {
+       score: (total.firstCPUIdle.score + next.firstCPUIdle.score),
+       numericValue: (total.firstCPUIdle.numericValue + next.firstCPUIdle.numericValue)
+      }
     }
   }, {
     date: today,
     url: '',
-    firstContentfulPaint: 0,
-    firstMeaningfulPaint: 0,
-    speedIndex: 0,
-    interactive: 0,
-    firstCPUIdle: 0
+    firstContentfulPaint: {score: 0, numericValue: 0},
+    firstMeaningfulPaint: {score: 0, numericValue: 0},
+    speedIndex: {score: 0, numericValue: 0},
+    interactive: {score: 0, numericValue: 0},
+    firstCPUIdle: {score: 0, numericValue: 0}
   })
+
+  console.log(sums)
 
   // const averages = Object.entries(sums).map(([key, value]) => {
   //   if (typeof value === 'number') {
@@ -121,17 +138,30 @@ const getKeyMetrics = async () => {
 
   const averages = {
     ...sums,
-    firstContentfulPaint: sums.firstContentfulPaint / totalItems,
-    firstMeaningfulPaint: sums.firstMeaningfulPaint / totalItems,
-    speedIndex: sums.speedIndex / totalItems,
-    interactive: sums.interactive / totalItems,
-    firstCPUIdle: sums.firstCPUIdle / totalItems
+    firstMeaningfulPaint: {
+        score: sums.firstMeaningfulPaint.score / totalItems,
+        numericValue: sums.firstMeaningfulPaint.numericValue / totalItems
+      },
+      firstContentfulPaint: {
+       score: sums.firstContentfulPaint.score / totalItems,
+       numericValue: sums.firstContentfulPaint.numericValue / totalItems
+      },
+      speedIndex: {
+       score: sums.speedIndex.score / totalItems,
+       numericValue: sums.speedIndex.numericValue / totalItems
+      },
+      interactive: {
+       score: sums.interactive.score / totalItems,
+       numericValue: sums.interactive.numericValue / totalItems
+      },
+      firstCPUIdle: {
+       score: sums.firstCPUIdle.score / totalItems,
+       numericValue: sums.firstCPUIdle.numericValue / totalItems
+      }
   }
 
   console.log(averages)
   
-
-
 }
 
 saveToDb().then(() => getKeyMetrics());
