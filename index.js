@@ -87,8 +87,18 @@ const getKeyMetrics = async () => {
     }
   })
 
-  console.log(onlyKeyMetrics)
+
   const totalItems = onlyKeyMetrics.length
+  const initialValue = {
+    date: today,
+    url: '',
+    score: 0,
+    firstContentfulPaint: {score: 0, numericValue: 0},
+    firstMeaningfulPaint: {score: 0, numericValue: 0},
+    speedIndex: {score: 0, numericValue: 0},
+    interactive: {score: 0, numericValue: 0},
+    firstCPUIdle: {score: 0, numericValue: 0}
+  }
   // TODO: refactor
   const sums = onlyKeyMetrics.reduce((total, next) => {
     
@@ -117,16 +127,7 @@ const getKeyMetrics = async () => {
        numericValue: (total.firstCPUIdle.numericValue + next.firstCPUIdle.numericValue)
       }
     }
-  }, {
-    date: today,
-    url: '',
-    score: 0,
-    firstContentfulPaint: {score: 0, numericValue: 0},
-    firstMeaningfulPaint: {score: 0, numericValue: 0},
-    speedIndex: {score: 0, numericValue: 0},
-    interactive: {score: 0, numericValue: 0},
-    firstCPUIdle: {score: 0, numericValue: 0}
-  })
+  }, initialValue)
 
   const averages = {
     ...sums,
@@ -163,4 +164,9 @@ const writeAvgs = async () => {
 }
 
 
-saveToDb().then(() => writeAvgs());
+const run = async () => {
+  await saveToDb()
+  await writeAvgs()
+};
+
+run()

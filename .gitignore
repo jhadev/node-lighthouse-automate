@@ -3,4 +3,5 @@ node_modules
 notes.md
 headers.json
 
-reports
+reports/*.json
+reports/*.csv
