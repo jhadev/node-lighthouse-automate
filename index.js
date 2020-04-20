@@ -9,12 +9,16 @@ require('dotenv').config();
 const read = promisify(fs.readFile);
 const write = promisify(fs.writeFile);
 const readDir = promisify(fs.readdir);
+const exists = promisify(fs.exists);
+const makeDir = promisify(fs.mkdir);
+const rename = promisify(fs.rename);
 
 // TODO: fix file name structure
 let now = moment().format('YYYY-MM-DD-HH-MM-ss');
 console.log(now);
 let today = moment().format('YYYY-MM-DD');
 console.log(today);
+let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
 const lighthouseCommand = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output csv --output-path=./reports/coach-${now}.json --chrome-flags="--headless" --save-assets`;
 
@@ -136,6 +140,7 @@ const getKeyMetrics = async () => {
 
   const averages = {
     ...sums,
+    reportsTotal: totalItems,
     score: sums.score / totalItems,
     firstMeaningfulPaint: {
       score: sums.firstMeaningfulPaint.score / totalItems,
@@ -171,9 +176,78 @@ const writeAvgs = async () => {
   );
 };
 
+const moveFiles = async () => {
+  const fileNames = await readDir('./reports/');
+
+  const filteredFileList = fileNames.filter((fileName) => {
+    if (
+      !fileName.includes(today) &&
+      fileName !== 'dailyAverage' &&
+      fileName !== 'lastSavedReport.json' &&
+      (fileName.includes('.json') || fileName.includes('.csv'))
+    ) {
+      return fileName;
+    }
+  });
+
+  if (filteredFileList.length) {
+    const dir = await exists(`./reports/${yesterday}`);
+    console.log(dir);
+    if (!dir) {
+      await makeDir(`./reports/${yesterday}`, { recursive: true });
+    }
+
+    filteredFileList.map(async (file) => {
+      return await rename(
+        `./reports/${file}`,
+        `./reports/${yesterday}/${file}`
+      );
+    });
+  }
+};
+
+const makeSubFolders = async (date) => {
+  const fileNames = await readDir(`./reports/${date}`);
+
+  // const filteredFileList = fileNames.filter(dir => dir === date)
+
+  if (fileNames.length) {
+    const CSVdir = await exists(`./reports/${date}/csv`);
+    const JSONdir = await exists(`./reports/${date}/json`);
+
+    if (!CSVdir) {
+      await makeDir(`./reports/${date}/csv`, { recursive: true });
+    }
+
+    if (!JSONdir) {
+      await makeDir(`./reports/${date}/json`, { recursive: true });
+    }
+
+    fileNames.map(async (file) => {
+      if (file.includes(`.json`)) {
+        return await rename(
+          `./reports/${date}/${file}`,
+          `./reports/${date}/json/${file}`
+        );
+      }
+
+      if (file.includes(`.csv`)) {
+        return await rename(
+          `./reports/${date}/${file}`,
+          `./reports/${date}/csv/${file}`
+        );
+      }
+
+      return file;
+    });
+  }
+};
+
 const run = async () => {
   await saveToDb();
   await writeAvgs();
+  await moveFiles();
+  await makeSubFolders(yesterday);
 };
 
 run();
