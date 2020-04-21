@@ -4,6 +4,7 @@ const { promisify } = require('util');
 // execute shell commands
 const sh = require('shelljs');
 const moment = require('moment');
+const { createAvgObj, getAvgScores } = require('./functions/helpers');
 require('dotenv').config();
 
 const read = promisify(fs.readFile);
@@ -14,7 +15,7 @@ const makeDir = promisify(fs.mkdir);
 const rename = promisify(fs.rename);
 
 // TODO: fix file name structure
-let now = moment().format('YYYY-MM-DD-HH-MM-ss');
+let now = moment().format('YYYY-MM-DD-HH-mm-ss');
 console.log(now);
 let today = moment().format('YYYY-MM-DD');
 console.log(today);
@@ -71,8 +72,8 @@ const getFilesForToday = async () => {
   );
 };
 
-const getKeyMetrics = async () => {
-  const files = await getFilesForToday();
+const getKeyMetrics = async (callback) => {
+  const files = await callback();
 
   const onlyKeyMetrics = files.map((file) => {
     file = JSON.parse(file);
@@ -90,88 +91,19 @@ const getKeyMetrics = async () => {
   });
 
   const totalItems = onlyKeyMetrics.length;
-  const initialValue = {
-    date: today,
-    url: '',
-    score: 0,
-    firstContentfulPaint: { score: 0, numericValue: 0 },
-    firstMeaningfulPaint: { score: 0, numericValue: 0 },
-    speedIndex: { score: 0, numericValue: 0 },
-    interactive: { score: 0, numericValue: 0 },
-    firstCPUIdle: { score: 0, numericValue: 0 },
-  };
-  // TODO: refactor
-  const sums = onlyKeyMetrics.reduce((total, next) => {
-    return {
-      date: today,
-      url: next.url,
-      score: total.score + next.score,
-      firstMeaningfulPaint: {
-        score:
-          total.firstMeaningfulPaint.score + next.firstMeaningfulPaint.score,
-        numericValue:
-          total.firstMeaningfulPaint.numericValue +
-          next.firstMeaningfulPaint.numericValue,
-      },
-      firstContentfulPaint: {
-        score:
-          total.firstContentfulPaint.score + next.firstContentfulPaint.score,
-        numericValue:
-          total.firstContentfulPaint.numericValue +
-          next.firstContentfulPaint.numericValue,
-      },
-      speedIndex: {
-        score: total.speedIndex.score + next.speedIndex.score,
-        numericValue:
-          total.speedIndex.numericValue + next.speedIndex.numericValue,
-      },
-      interactive: {
-        score: total.interactive.score + next.interactive.score,
-        numericValue:
-          total.interactive.numericValue + next.interactive.numericValue,
-      },
-      firstCPUIdle: {
-        score: total.firstCPUIdle.score + next.firstCPUIdle.score,
-        numericValue:
-          total.firstCPUIdle.numericValue + next.firstCPUIdle.numericValue,
-      },
-    };
-  }, initialValue);
 
-  const averages = {
-    ...sums,
-    reportsTotal: totalItems,
-    score: sums.score / totalItems,
-    firstMeaningfulPaint: {
-      score: sums.firstMeaningfulPaint.score / totalItems,
-      numericValue: sums.firstMeaningfulPaint.numericValue / totalItems,
-    },
-    firstContentfulPaint: {
-      score: sums.firstContentfulPaint.score / totalItems,
-      numericValue: sums.firstContentfulPaint.numericValue / totalItems,
-    },
-    speedIndex: {
-      score: sums.speedIndex.score / totalItems,
-      numericValue: sums.speedIndex.numericValue / totalItems,
-    },
-    interactive: {
-      score: sums.interactive.score / totalItems,
-      numericValue: sums.interactive.numericValue / totalItems,
-    },
-    firstCPUIdle: {
-      score: sums.firstCPUIdle.score / totalItems,
-      numericValue: sums.firstCPUIdle.numericValue / totalItems,
-    },
-  };
+  const sums = getAvgScores(onlyKeyMetrics, today);
+
+  const averages = createAvgObj(sums, totalItems);
 
   return averages;
 };
 
-const writeAvgs = async () => {
-  const averages = await getKeyMetrics();
+const writeAvgs = async (keyMetricsFunc, whenFunc, date) => {
+  const averages = await keyMetricsFunc(whenFunc);
 
   return await write(
-    `./reports/dailyAverage/${today}-score.json`,
+    `./reports/dailyAverage/${date}-score.json`,
     JSON.stringify(averages, null, 2)
   );
 };
@@ -245,7 +177,7 @@ const makeSubFolders = async (date) => {
 
 const run = async () => {
   await saveToDb();
-  await writeAvgs();
+  await writeAvgs(getKeyMetrics, getFilesForToday, today);
   await moveFiles();
   await makeSubFolders(yesterday);
 };
