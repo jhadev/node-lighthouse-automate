@@ -5,4 +5,7 @@ headers.json
 
 reports/*.json
 reports/*.csv
+reports/**/**/*.json
+reports/**/**/*.csv
 todo.md
+test.js
