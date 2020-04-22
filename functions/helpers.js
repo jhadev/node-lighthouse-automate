@@ -26,7 +26,28 @@ const createAvgObj = (sums, totalItems) => {
   };
 };
 
-const getAvgScores = (arr, date) => {
+// const keys = [
+//   'url',
+//   'score',
+//   'firstContentfulPaint',
+//   'firstMeaningfulPaint',
+//   'speedIndex',
+//   'interactive',
+//   'firstCPUIdle',
+// ];
+
+//   const initialValue = {
+//     date,
+//     [keys[0]]: '',
+//     [keys[1]]: 0,
+//     [keys[2]]: { score: 0, numericValue: 0 },
+//     [keys[3]]: { score: 0, numericValue: 0 },
+//     [keys[4]]: { score: 0, numericValue: 0 },
+//     [keys[5]]: { score: 0, numericValue: 0 },
+//     [keys[6]]: { score: 0, numericValue: 0 },
+//   };
+
+const getAvgScores = (arr, date, keys) => {
   const initialValue = {
     date,
     url: '',

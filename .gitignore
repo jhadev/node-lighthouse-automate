@@ -9,3 +9,4 @@ reports/**/**/*.json
 reports/**/**/*.csv
 todo.md
 test.js
+sheets/google-creds.json
