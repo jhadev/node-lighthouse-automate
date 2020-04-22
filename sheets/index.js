@@ -15,7 +15,26 @@ const parseJSON = async (date) => {
   return JSON.parse(data);
 };
 
-const manageSheets = async () => {
+const mapData = (obj) => {
+  const arr = [obj];
+  const mapped = arr.map((data) => {
+    return {
+      date: data.date,
+      url: data.url,
+      score: data.score,
+      firstMeaningfulPaint: data.firstMeaningfulPaint.numericValue,
+      firstContentfulPaint: data.firstContentfulPaint.numericValue,
+      speedIndex: data.speedIndex.numericValue,
+      interactive: data.interactive.numericValue,
+      firstCPUIdle: data.firstCPUIdle.numericValue,
+      reportsTotal: data.reportsTotal,
+    };
+  });
+
+  return mapped[0];
+};
+
+const manageSheets = async (title) => {
   const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
   await doc.useServiceAccountAuth(creds);
 
@@ -24,13 +43,15 @@ const manageSheets = async () => {
     client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
     private_key: process.env.GOOGLE_PRIVATE_KEY,
   });
-
   await doc.loadInfo(); // loads document properties and worksheets
+  let sheet = doc.sheetsByIndex[1];
   // FIXME: this is just testing
-  const sheet = await doc.addSheet({ headerValues: ['date', 'url', 'score'] });
   const data = await parseJSON(today);
-  const { date, url, score } = data;
-  sheet.addRow({ date, url, score });
+  if (!sheet) {
+    sheet = await doc.addSheet({ headerValues: Object.keys(data) });
+  }
+  const row = mapData(data);
+  sheet.addRow(row);
 };
 
 manageSheets();
