@@ -1,6 +1,19 @@
+const fs = require('fs');
+const { promisify } = require('util');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
+const moment = require('moment');
 require('dotenv').config();
 const creds = require('./google-creds.json'); // the file saved above
+
+let today = moment().format('YYYY-MM-DD');
+
+const readFile = promisify(fs.readFile);
+
+const parseJSON = async (date) => {
+  const path = `./reports/dailyAverage/${date}-score.json`;
+  let data = await readFile(path);
+  return JSON.parse(data);
+};
 
 const manageSheets = async () => {
   const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
@@ -13,15 +26,11 @@ const manageSheets = async () => {
   });
 
   await doc.loadInfo(); // loads document properties and worksheets
-  console.log(doc.title);
-  await doc.updateProperties({ title: 'renamed doc' });
-
-  const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id]
-  console.log(sheet.title);
-  console.log(sheet.rowCount);
-
-  // adding / removing sheets
-  await doc.addSheet({ title: 'hot new sheet!' });
+  // FIXME: this is just testing
+  const sheet = await doc.addSheet({ headerValues: ['date', 'url', 'score'] });
+  const data = await parseJSON(today);
+  const { date, url, score } = data;
+  sheet.addRow({ date, url, score });
 };
 
 manageSheets();
