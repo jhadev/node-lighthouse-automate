@@ -21,20 +21,24 @@ const mapData = (obj) => {
     return {
       date: data.date,
       url: data.url,
-      score: data.score,
-      firstMeaningfulPaint: data.firstMeaningfulPaint.numericValue,
-      firstContentfulPaint: data.firstContentfulPaint.numericValue,
-      speedIndex: data.speedIndex.numericValue,
-      interactive: data.interactive.numericValue,
-      firstCPUIdle: data.firstCPUIdle.numericValue,
-      reportsTotal: data.reportsTotal,
+      score: (data.score * 100).toFixed(2),
+      firstMeaningfulPaint: (
+        data.firstMeaningfulPaint.numericValue / 1000
+      ).toFixed(2),
+      firstContentfulPaint: (
+        data.firstContentfulPaint.numericValue / 1000
+      ).toFixed(2),
+      speedIndex: (data.speedIndex.numericValue / 1000).toFixed(2),
+      interactive: (data.interactive.numericValue / 1000).toFixed(2),
+      firstCPUIdle: (data.firstCPUIdle.numericValue / 1000).toFixed(2),
+      reportsTotal: data.reportsTotal ? data.reportsTotal.toFixed(2) : '',
     };
   });
 
   return mapped[0];
 };
 
-const manageSheets = async (title) => {
+const manageSheets = async (date) => {
   const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
   await doc.useServiceAccountAuth(creds);
 
@@ -46,7 +50,7 @@ const manageSheets = async (title) => {
   await doc.loadInfo(); // loads document properties and worksheets
   let sheet = doc.sheetsByIndex[1];
   // FIXME: this is just testing
-  const data = await parseJSON(today);
+  const data = await parseJSON(date);
   if (!sheet) {
     sheet = await doc.addSheet({ headerValues: Object.keys(data) });
   }
@@ -54,4 +58,4 @@ const manageSheets = async (title) => {
   sheet.addRow(row);
 };
 
-manageSheets();
+manageSheets('2020-04-18');
