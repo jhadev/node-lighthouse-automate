@@ -182,4 +182,13 @@ const run = async () => {
   await makeSubFolders(yesterday);
 };
 
-run();
+const sendToAtlas = (date) => {
+  const importToDb = `mongoimport --uri "${process.env.MONGO_CONNECT}" --collection averages --file .//reports/dailyAverage/${date}-score.json`;
+  sh.exec(importToDb, (code, output) => {
+    console.log(output);
+  });
+};
+
+sendToAtlas(yesterday);
+
+// run();
