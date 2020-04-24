@@ -21,7 +21,7 @@ let today = moment().format('YYYY-MM-DD');
 console.log(today);
 let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
-const lighthouseCommand = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output csv --output-path=./reports/coach-${now}.json --chrome-flags="--headless" --save-assets`;
+const lighthouseCommand = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output csv --output-path=./reports/coach-${now}.json --chrome-flags="--headless"`;
 
 const importToDb = `mongoimport --uri "${process.env.MONGO_CONNECT}" --jsonArray --collection data --file .//reports/lastSavedReport.json`;
 
@@ -182,13 +182,4 @@ const run = async () => {
   await makeSubFolders(yesterday);
 };
 
-const sendToAtlas = (date) => {
-  const importToDb = `mongoimport --uri "${process.env.MONGO_CONNECT}" --collection averages --file .//reports/dailyAverage/${date}-score.json`;
-  sh.exec(importToDb, (code, output) => {
-    console.log(output);
-  });
-};
-
-sendToAtlas(yesterday);
-
-// run();
+run();
