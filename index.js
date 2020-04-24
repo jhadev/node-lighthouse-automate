@@ -23,7 +23,7 @@ let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
 const lighthouseCommand = `lighthouse ${process.env.URL} --extra-headers=./headers.json --output json --output csv --output-path=./reports/coach-${now}.json --chrome-flags="--headless"`;
 
-const importToDb = `mongoimport --uri "${process.env.MONGO_CONNECT}" --jsonArray --collection data --file .//reports/lastSavedReport.json`;
+const importToDb = `mongoimport --jsonArray -d lighthouse-automation -c data --file .//reports/lastSavedReport.json`;
 
 // make sure lighthouse finishes before moving on to next task
 const runLighthouse = (command) => {
