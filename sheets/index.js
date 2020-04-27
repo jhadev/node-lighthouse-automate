@@ -5,7 +5,7 @@ const moment = require('moment');
 require('dotenv').config();
 const creds = require('./google-creds.json'); // the file saved above
 
-let today = moment().format('YYYY-MM-DD');
+const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
 const readFile = promisify(fs.readFile);
 
@@ -58,4 +58,4 @@ const manageSheets = async (date) => {
   sheet.addRow(row);
 };
 
-manageSheets('2020-04-18');
+manageSheets(yesterday);

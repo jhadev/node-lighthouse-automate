@@ -14,3 +14,10 @@ cron.schedule('10 0 * * *', () => {
     console.log(output);
   });
 });
+
+cron.schedule('16 0 * * *', () => {
+  console.log('running sheets/index.js at 12:16am');
+  sh.exec('node sheets/index.js', (code, output) => {
+    console.log(output);
+  });
+});
