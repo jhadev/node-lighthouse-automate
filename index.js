@@ -73,30 +73,34 @@ const getFilesForToday = async () => {
 };
 
 const getKeyMetrics = async (callback) => {
-  const files = await callback();
+  try {
+    const files = await callback();
 
-  const onlyKeyMetrics = files.map((file) => {
-    file = JSON.parse(file);
-    return {
-      userAgent: file.userAgent,
-      fetchTime: file.fetchTime,
-      url: file.finalUrl,
-      firstMeaningfulPaint: file.audits['first-meaningful-paint'],
-      firstContentfulPaint: file.audits['first-contentful-paint'],
-      speedIndex: file.audits['speed-index'],
-      interactive: file.audits['interactive'],
-      firstCPUIdle: file.audits['first-cpu-idle'],
-      score: file.categories.performance.score,
-    };
-  });
+    const onlyKeyMetrics = files.map((file) => {
+      file = JSON.parse(file);
+      return {
+        userAgent: file.userAgent,
+        fetchTime: file.fetchTime,
+        url: file.finalUrl,
+        firstMeaningfulPaint: file.audits['first-meaningful-paint'],
+        firstContentfulPaint: file.audits['first-contentful-paint'],
+        speedIndex: file.audits['speed-index'],
+        interactive: file.audits['interactive'],
+        firstCPUIdle: file.audits['first-cpu-idle'],
+        score: file.categories.performance.score,
+      };
+    });
 
-  const totalItems = onlyKeyMetrics.length;
+    const totalItems = onlyKeyMetrics.length;
 
-  const sums = getAvgScores(onlyKeyMetrics, today);
+    const sums = getAvgScores(onlyKeyMetrics, today);
 
-  const averages = createAvgObj(sums, totalItems);
+    const averages = createAvgObj(sums, totalItems);
 
-  return averages;
+    return averages;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const writeAvgs = async (keyMetricsFunc, whenFunc, date) => {
@@ -109,66 +113,80 @@ const writeAvgs = async (keyMetricsFunc, whenFunc, date) => {
 };
 
 const moveFiles = async (date) => {
-  const fileNames = await readDir('./reports/');
+  try {
+    const fileNames = await readDir('./reports/');
 
-  const filteredFileList = fileNames.filter((fileName) => {
-    if (
-      !fileName.includes(today) &&
-      fileName !== 'dailyAverage' &&
-      fileName !== 'lastSavedReport.json' &&
-      (fileName.includes('.json') || fileName.includes('.csv'))
-    ) {
-      return fileName;
-    }
-  });
-
-  if (filteredFileList.length) {
-    const dir = await exists(`./reports/${date}`);
-    console.log(dir);
-    if (!dir) {
-      await makeDir(`./reports/${date}`, { recursive: true });
-    }
-
-    filteredFileList.map(async (file) => {
-      return await rename(`./reports/${file}`, `./reports/${date}/${file}`);
+    const filteredFileList = fileNames.filter((fileName) => {
+      if (
+        !fileName.includes(today) &&
+        fileName !== 'dailyAverage' &&
+        fileName !== 'lastSavedReport.json' &&
+        (fileName.includes('.json') || fileName.includes('.csv'))
+      ) {
+        return fileName;
+      }
     });
+
+    if (filteredFileList.length) {
+      const dir = await exists(`./reports/${date}`);
+      console.log(dir);
+      if (!dir) {
+        await makeDir(`./reports/${date}`, { recursive: true });
+      }
+
+      filteredFileList.map(async (file) => {
+        return await rename(`./reports/${file}`, `./reports/${date}/${file}`);
+      });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
 const makeSubFolders = async (date) => {
-  const fileNames = await readDir(`./reports/${date}`);
+  try {
+    const isFolderPresent = await exists(`./reports/${date}`);
 
-  // const filteredFileList = fileNames.filter(dir => dir === date)
-
-  if (fileNames.length) {
-    const CSVdir = await exists(`./reports/${date}/csv`);
-    const JSONdir = await exists(`./reports/${date}/json`);
-
-    if (!CSVdir) {
-      await makeDir(`./reports/${date}/csv`, { recursive: true });
+    if (!isFolderPresent) {
+      return console.log('folder has not been created yet.');
     }
 
-    if (!JSONdir) {
-      await makeDir(`./reports/${date}/json`, { recursive: true });
+    const fileNames = await readDir(`./reports/${date}`);
+
+    // const filteredFileList = fileNames.filter(dir => dir === date)
+
+    if (fileNames.length) {
+      const CSVdir = await exists(`./reports/${date}/csv`);
+      const JSONdir = await exists(`./reports/${date}/json`);
+
+      if (!CSVdir) {
+        await makeDir(`./reports/${date}/csv`, { recursive: true });
+      }
+
+      if (!JSONdir) {
+        await makeDir(`./reports/${date}/json`, { recursive: true });
+      }
+
+      fileNames.map(async (file) => {
+        if (file.includes(`.json`)) {
+          return await rename(
+            `./reports/${date}/${file}`,
+            `./reports/${date}/json/${file}`
+          );
+        }
+
+        if (file.includes(`.csv`)) {
+          return await rename(
+            `./reports/${date}/${file}`,
+            `./reports/${date}/csv/${file}`
+          );
+        }
+
+        return file;
+      });
     }
-
-    fileNames.map(async (file) => {
-      if (file.includes(`.json`)) {
-        return await rename(
-          `./reports/${date}/${file}`,
-          `./reports/${date}/json/${file}`
-        );
-      }
-
-      if (file.includes(`.csv`)) {
-        return await rename(
-          `./reports/${date}/${file}`,
-          `./reports/${date}/csv/${file}`
-        );
-      }
-
-      return file;
-    });
+  } catch (err) {
+    console.log(err);
   }
 };
 
