@@ -108,7 +108,7 @@ const writeAvgs = async (keyMetricsFunc, whenFunc, date) => {
   );
 };
 
-const moveFiles = async () => {
+const moveFiles = async (date) => {
   const fileNames = await readDir('./reports/');
 
   const filteredFileList = fileNames.filter((fileName) => {
@@ -123,17 +123,14 @@ const moveFiles = async () => {
   });
 
   if (filteredFileList.length) {
-    const dir = await exists(`./reports/${yesterday}`);
+    const dir = await exists(`./reports/${date}`);
     console.log(dir);
     if (!dir) {
-      await makeDir(`./reports/${yesterday}`, { recursive: true });
+      await makeDir(`./reports/${date}`, { recursive: true });
     }
 
     filteredFileList.map(async (file) => {
-      return await rename(
-        `./reports/${file}`,
-        `./reports/${yesterday}/${file}`
-      );
+      return await rename(`./reports/${file}`, `./reports/${date}/${file}`);
     });
   }
 };
@@ -178,7 +175,7 @@ const makeSubFolders = async (date) => {
 const run = async () => {
   await saveToDb();
   await writeAvgs(getKeyMetrics, getFilesForToday, today);
-  await moveFiles();
+  await moveFiles(yesterday);
   await makeSubFolders(yesterday);
 };
 
