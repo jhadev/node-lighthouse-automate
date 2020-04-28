@@ -58,4 +58,6 @@ const manageSheets = async (date) => {
   sheet.addRow(row);
 };
 
-manageSheets(yesterday);
+manageSheets(yesterday).then(() => {
+  console.log(`Lighthouse data sent to Google sheets.`);
+});
