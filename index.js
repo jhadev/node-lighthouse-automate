@@ -13,6 +13,7 @@ const readDir = promisify(fs.readdir);
 const exists = promisify(fs.exists);
 const makeDir = promisify(fs.mkdir);
 const rename = promisify(fs.rename);
+const unlink = promisify(fs.unlink);
 
 // TODO: fix file name structure
 let now = moment().format('YYYY-MM-DD-HH-mm-ss');
@@ -35,15 +36,35 @@ const runLighthouse = (command) => {
   });
 };
 
+const checkForError = async () => {
+  const JSONpath = `./reports/coach-${now}.report.json`;
+  const CSVpath = `./reports/coach-${now}.report.csv`;
+
+  let data = await read(JSONpath, 'utf8');
+
+  data = JSON.parse(data);
+
+  if (data.runWarnings.length) {
+    console.log(data.runWarnings.join(', '));
+    await unlink(JSONpath);
+    console.log(`DELETING - ${JSONpath}`);
+    await unlink(CSVpath);
+    console.log(`DELETING - ${CSVpath}`);
+    return true;
+  }
+
+  return false;
+};
+
 const saveToDb = async () => {
-  // wait for lighthouse to finish
-  await runLighthouse(lighthouseCommand);
   // file path for lighthouse output
   const path = `./reports/coach-${now}.report.json`;
   // read json
   let data = await read(path, 'utf8');
+
   // put json data into an array
   data = [JSON.parse(data)];
+
   // overwrite json file with array
   await write('./reports/lastSavedReport.json', JSON.stringify(data, null, 2));
   // import into mongo
@@ -191,10 +212,15 @@ const makeSubFolders = async (date) => {
 };
 
 const run = async () => {
-  await saveToDb();
-  await writeAvgs(getKeyMetrics, getFilesForToday, today);
-  await moveFiles(yesterday);
-  await makeSubFolders(yesterday);
+  // wait for lighthouse to finish
+  await runLighthouse(lighthouseCommand);
+  const isError = await checkForError();
+  if (!isError) {
+    await saveToDb();
+    await writeAvgs(getKeyMetrics, getFilesForToday, today);
+    await moveFiles(yesterday);
+    await makeSubFolders(yesterday);
+  }
 };
 
 run();
